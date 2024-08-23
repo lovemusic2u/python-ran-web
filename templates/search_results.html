@@ -1,0 +1,44 @@
+{% include "header.html" %}
+
+
+<div class="container text-center">
+    <div class="row">
+      <div class="col-md-auto">
+        <h1>Search Results for "{{ query }}"</h1>
+      </div>
+      <div class="col">
+        <a class="btn btn-primary" href="../" role="button">กลับหน้าหลัก</a>
+      </div>
+    </div>
+</div>
+     
+    <table class="table table-bordered border-primary">
+        <tr>
+            <th>ProductNum</th>
+            <th>ItemMain</th>
+            <th>ItemSub</th>
+            <th>ItemName</th>
+            <th>ItemSec</th>
+            <th>ราคา</th>
+            <th>คงเหลือ</th>
+            <th>หมวด</th>
+            <th>ซ่อน</th>
+        </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{ result[0] }}</td>
+                <td>{{ result[1] }}</td>
+                <td>{{ result[2] }}</td>
+                <td>{{ result[3] }}</td>
+                <td>{{ result[4] }}</td>
+                <td>{{ result[5] }}</td>
+                <td>{{ result[6] }}</td>
+                <td>{{ result[7] }}</td>
+                <td>{{ result[17] }}</td>
+            </tr>
+
+        {% endfor %}
+    </table>
+
+
+    {% include "footer.html" %}

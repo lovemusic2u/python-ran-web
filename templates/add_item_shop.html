@@ -1,0 +1,139 @@
+{% include "header.html" %}
+
+<form action="/add" method="POST">
+
+    <div class="input-group">
+        <span class="input-group-text">ItemMain Sub and Name</span>
+        <input type="text" name="ItemMain" aria-label="ItemMain" class="form-control" autocomplete="off">
+        <input type="text" name="ItemSub" aria-label="ItemSub" class="form-control" autocomplete="off">
+        <input type="text" name="ItemName" aria-label="ItemName" class="form-control" autocomplete="off">
+      </div><br>
+      <div class="row mb-10">
+      <div class="col-sm-2">
+    <select class="form-select" id="ItemSec" name="ItemSec">
+        <option value="1">เติมเงิน</option>
+        <option value="2">กิจกรรม</option>
+    </select>
+</div>
+<div class="col-sm-4">
+    <select class="form-select" id="ItemCtg" name="ItemCtg">
+        <option value="1">P-สร้อย/แหวน/ต่างหู</option>
+        <option value="2">P-บัตร</option>
+        <option value="3">P-สัตว์เลี้ยง</option>
+        <option value="4">P-กล่องของขวัญ</option>
+        <option value="5">P-แฟชั่น/ชุดทับ</option>
+        <option value="6">P-ยานพาหนะ</option>
+        <option value="7">V-สร้อย/แหวน/ต่างหู</option>
+        <option value="8">V-บัตร</option>
+        <option value="9">V-สัตว์เลี้ยง</option>
+        <option value="10">V-กล่องของขวัญ</option>
+        <option value="11">V-แฟชั่น/ชุดทับ</option>
+        <option value="12">V-ยานพาหนะ</option>
+    </select>
+</div>
+<div class="col-sm-2">
+<select class="form-select" id="isHide" name="isHide">
+        <option value="0">แสดง</option>
+        <option value="1">ไม่แสดง</option>
+    </select>
+</div>
+</div>
+<br>
+    <div class="row mb-6">
+        <label for="inputprice" class="col-sm-1 col-form-label">ราคา</label>
+        <div class="col-sm-2">
+          <input type="text" name="ItemPrice" placeholder="ราคา" class="form-control" id="ItemPrice" autocomplete="off">
+        </div>
+
+        <label for="inputstock" class="col-sm-1 col-form-label">จำนวน</label>
+        <div class="col-sm-2">
+          <input type="text" name="Itemstock" placeholder="จำนวน" class="form-control" id="Itemstock" autocomplete="off">
+        </div>
+
+      </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary">เพิ่มข้อมูล</button>
+</form>
+
+<hr class="border border-primary border-3 opacity-75">
+
+<h1>Data Display</h1>
+    <table class="table table-bordered border-primary">
+        <tr>
+            <th>ProductNum</th>
+            <th>ItemMain</th>
+            <th>ItemSub</th>
+            <th>ItemName</th>
+            <th>ItemSec</th>
+            <th>ราคา</th>
+            <th>คงเหลือ</th>
+            <th>หมวด</th>
+            <th>ซ่อน</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>
+                {% if row[4] == 1 %}
+        <p style="color:rgb(163, 1, 42);">เติมเงิน</p>
+        {% elif row[4] == 2 %}
+        กิจกรรม
+        {% else %}
+        Unknown
+        {% endif %}
+
+
+            </td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+            <td>
+
+                {% if row[7] == 1 %}
+        P-สร้อย/แหวน/ต่างหู
+        {% elif row[7] == 2 %}
+        P-บัตร
+        {% elif row[7] == 3 %}
+        P-สัตว์เลี้ยง
+        {% elif row[7] == 4 %}
+        P-กล่องของขวัญ
+        {% elif row[7] == 5 %}
+        P-แฟชั่น/ชุดทับ
+        {% elif row[7] == 6 %}
+        P-ยานพาหนะ
+        {% elif row[7] == 7 %}
+        V-สร้อย/แหวน/ต่างหู
+        {% elif row[7] == 8 %}
+        V-บัตร
+        {% elif row[7] == 9 %}
+        V-สัตว์เลี้ยง
+        {% elif row[7] == 10 %}
+        V-กล่องของขวัญ
+        {% elif row[7] == 11 %}
+        V-แฟชั่น/ชุดทับ
+        {% elif row[7] == 12 %}
+        V-ยานพาหนะ
+        
+        {% else %}
+        Unknown
+        {% endif %}
+
+            </td>
+            <td> 
+        {% if row[17] == 0 %}
+        <p style="color:rgb(21, 138, 50);">แสดง</p>
+        {% elif row[17] == 1 %}
+        ไม่แสดง
+        {% else %}
+        Unknown
+        {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+{% include "footer.html" %}

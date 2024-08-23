@@ -1,0 +1,86 @@
+{% include "header.html" %}
+
+
+<div class="row g-3">
+    <div class="col">
+<form action="/search" method="POST">
+  <input type="text" class="form-control" name="query" placeholder="Enter your search query">
+</div>
+    <div class="col">
+  <button class="btn btn-primary" type="submit">Search</button>
+</form>
+  </div>
+  </div>
+
+<hr/>
+<h1>Data Display</h1>
+    <table class="table table-bordered border-primary">
+        <tr>
+            <th>ProductNum</th>
+            <th>ItemMain</th>
+            <th>ItemSub</th>
+            <th>ItemName</th>
+            <th>ItemSec</th>
+            <th>ราคา</th>
+            <th>คงเหลือ</th>
+            <th>หมวด</th>
+            <th>ซ่อน</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td> {% if row[4] == 1 %}
+              <p style="color:rgb(163, 1, 42);">เติมเงิน</p>
+              {% elif row[4] == 2 %}
+              กิจกรรม
+              {% else %}
+              Unknown
+              {% endif %}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+            <td>
+
+              {% if row[7] == 1 %}
+      P-สร้อย/แหวน/ต่างหู
+      {% elif row[7] == 2 %}
+      P-บัตร
+      {% elif row[7] == 3 %}
+      P-สัตว์เลี้ยง
+      {% elif row[7] == 4 %}
+      P-กล่องของขวัญ
+      {% elif row[7] == 5 %}
+      P-แฟชั่น/ชุดทับ
+      {% elif row[7] == 6 %}
+      P-ยานพาหนะ
+      {% elif row[7] == 7 %}
+      V-สร้อย/แหวน/ต่างหู
+      {% elif row[7] == 8 %}
+      V-บัตร
+      {% elif row[7] == 9 %}
+      V-สัตว์เลี้ยง
+      {% elif row[7] == 10 %}
+      V-กล่องของขวัญ
+      {% elif row[7] == 11 %}
+      V-แฟชั่น/ชุดทับ
+      {% elif row[7] == 12 %}
+      V-ยานพาหนะ
+      
+      {% else %}
+      Unknown
+      {% endif %}
+</td>
+            <td>{% if row[17] == 0 %}
+              <p style="color:rgb(21, 138, 50);">แสดง</p>
+              {% elif row[17] == 1 %}
+              ไม่แสดง
+              {% else %}
+              Unknown
+              {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% include "footer.html" %}

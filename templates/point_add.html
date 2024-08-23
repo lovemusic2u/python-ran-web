@@ -1,0 +1,23 @@
+{% include "header.html" %}
+
+{% block content %}
+<h1>Add Points to User</h1>
+<form action="{{ url_for('point.point_add') }}" method="POST">
+    <div class="form-group">
+        <label for="UserName">User Name:</label>
+        <input type="text" class="form-control" id="UserName" name="UserName" required>
+    </div>
+    <div class="form-group">
+        <label for="UserPoint">Point:</label>
+        <input type="number" class="form-control" id="UserPoint" name="UserPoint" required>
+    </div>
+    <div class="form-group">
+        <label for="UserPoint2">Point2:</label>
+        <input type="number" class="form-control" id="UserPoint2" name="UserPoint2" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Points</button>
+</form>
+{% endblock %}
+
+
+{% include "footer.html" %}

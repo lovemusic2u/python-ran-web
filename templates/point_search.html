@@ -1,0 +1,159 @@
+{% include "header.html" %}
+
+<div class="container text-center">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <h3>Search Results for "{{ search_term }}"</h3>
+      </div>
+      <div class="col col-lg-2">
+        <a class="btn btn-primary" href="../point" role="button">กลับหน้าหลัก</a>
+      </div>
+      <div class="col col-lg-2">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addpointModal">เพิ่ม Point</button>
+
+      <div class="modal fade" id="addpointModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Points to User </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           
+            <div class="modal-body">
+              <form action="{{ url_for('point.point_add') }}" method="POST"> 
+
+                <div class="row mb-3">
+                  <label for="UserName" class="col-sm-5 col-form-label">User Name:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control" id="UserName" name="UserName" required>
+                  </div>
+                </div>
+                <div class="row mb-3">
+              <label for="userPoint" class="col-sm-5 col-form-label">Point กิจกรรม:</label>
+              <div class="col-sm-5">
+              <input type="number" class="form-control" id="UserPoint" name="UserPoint">
+            </div>
+          </div>
+          <div class="row mb-3">
+              <label for="userPoint2" class="col-sm-5 col-form-label">Point เติม:</label>
+              <div class="col-sm-5">
+              <input type="number" class="form-control" id="UserPoint2" name="UserPoint2">
+            </div>
+          </div>
+          </div>
+              
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Points</button>
+             
+              </div>
+               </form>
+              
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      </div>
+    </div>
+</div>
+     
+    <table class="table table-bordered border-primary">
+        <tr>
+          <th>ChaNum</th>
+          <th>UserNum</th>
+          <th>UserName</th>
+          <th>ChaName</th>
+          <th>เลเวล</th>
+          <th>ChaGuName</th>
+          <th>ChaMoney</th>
+          <th>Point กิจกรรม</th>
+          <th>Point เติมเงิน</th>
+          <th>ChaOnline</th>
+          <th>UserOnline</th>
+          <th>PlayTime</th>
+          <th>ดำเนินการ</th>
+        </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{ result[0] }}</td>
+                <td>{{ result[1] }}</td>
+                <td>{{ result[2] }}</td>
+                <td>{{ result[3] }}</td>
+                <td>{{ result[4] }}</td>
+                <td>{{ result[5] }}</td>
+                <td>{{ result[6] }}</td>
+                <td>{{ result[7] }}</td>
+                <td>{{ result[8] }}</td>
+                <td> {% if result[9] == 1 %}
+                  <p style="color:rgb(18, 224, 97);">Online</p>
+                  {% elif result[9] == 0 %}
+                  ไม่ได้ online
+                  {% else %}
+                  Unknown
+                  {% endif %}</td>
+    
+    
+                  <td> {% if result[10] == 1 %}
+                    <p style="color:rgb(18, 224, 97);">Online</p>
+                    {% elif result[10] == 0 %}
+                    ไม่ได้ online
+                    {% else %}
+                    Unknown
+                    {% endif %}</td>
+                    
+                <td>{{ result[11] }}</td>
+                <td> 
+                 
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ result[0] }}">แก้ไข</button>
+
+     </td>
+            </tr>
+
+  
+<div class="modal fade" id="exampleModal{{ result[0] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">แก้ไข : {{ result[3] }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+     
+      <div class="modal-body">
+        <form action="{{ url_for('point.update_data', chanum=result[0]) }}" method="POST"> 
+        <input type="hidden" name="chanum" value="{{ result[0] }}">
+        
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">ชื่อ:</label>
+            <input type="text" class="form-control" name="ChaName" value="{{ result[3] }}">
+         
+        <label for="userPoint" class="col-form-label">Point กิจกรรม:</label>
+        <input type="number" class="form-control" name="UserPoint" value="{{ result[6] }}">
+    
+        <label for="userPoint2" class="col-form-label">Point เติม:</label>
+        <input type="number" class="form-control" name="UserPoint2" value="{{ result[7] }}">
+   
+        <label for="playTime" class="col-form-label">เวลาออนไลน์:</label>
+        <input type="number" class="form-control" name="PlayTime" value="{{ result[10] }}">
+    </div>
+        
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+       
+        </div>
+         </form>
+        
+      
+      </div>
+    </div>
+  </div>
+</div>
+     
+            {% endfor %}
+    </table>
+
+</div>
+    {% include "footer.html" %}

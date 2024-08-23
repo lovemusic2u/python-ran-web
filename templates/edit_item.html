@@ -1,0 +1,65 @@
+{% include "header.html" %}
+
+    <h1>Edit Item</h1>
+    <form action="{{ url_for('shop.edit', item_id=item.ProductNum) }}" method="post">
+
+        <div class="input-group">
+        <span class="input-group-text">ItemMain Sub and Name</span>
+        <input type="text" class="form-control" name="ItemMain" value="{{ item.ItemMain }}" autocomplete="off">
+        <input type="text" class="form-control" name="ItemSub" value="{{ item.ItemSub }}" autocomplete="off">
+        <input type="text" class="form-control" name="ItemName" value="{{ item.ItemName }}" autocomplete="off">
+        </div><br/>
+
+        <div class="row mb-10">
+            <div class="col-sm-2">
+          <select class="form-select" id="ItemSec" name="ItemSec">
+            <option value="1" {% if item.ItemSec == 1 %}selected{% endif %}>เติมเงิน</option>
+            <option value="2" {% if item.ItemSec == 2 %}selected{% endif %}>กิจกรรม</option>
+              
+          </select>
+      </div>
+      <div class="col-sm-3">
+          <select class="form-select" id="ItemCtg" name="ItemCtg">
+
+            <option value="1" {% if item.ItemCtg == 1 %}selected{% endif %}>P-สร้อย/แหวน/ต่างหู</option>
+            <option value="2" {% if item.ItemCtg == 2 %}selected{% endif %}>P-บัตร</option>
+            <option value="3" {% if item.ItemCtg == 3 %}selected{% endif %}>P-สัตว์เลี้ยง</option>
+            <option value="4" {% if item.ItemCtg == 4 %}selected{% endif %}>P-กล่องของขวัญ</option>
+            <option value="5" {% if item.ItemCtg == 5 %}selected{% endif %}>P-แฟชั่น/ชุดทับ</option>
+            <option value="6" {% if item.ItemCtg == 6 %}selected{% endif %}>P-ยานพาหนะ</option>
+            <option value="7" {% if item.ItemCtg == 7 %}selected{% endif %}>V-สร้อย/แหวน/ต่างหู</option>
+            <option value="8" {% if item.ItemCtg == 8 %}selected{% endif %}>V-บัตร</option>
+            <option value="9" {% if item.ItemCtg == 9 %}selected{% endif %}>V-สัตว์เลี้ยง</option>
+            <option value="10" {% if item.ItemCtg == 10 %}selected{% endif %}>V-กล่องของขวัญ</option>
+            <option value="11" {% if item.ItemCtg == 11 %}selected{% endif %}>V-แฟชั่น/ชุดทับ</option>
+            <option value="12" {% if item.ItemCtg == 12 %}selected{% endif %}>V-ยานพาหนะ</option>
+
+          </select>
+      </div>
+      <div class="col-sm-2">
+      <select class="form-select" id="isHide" name="isHide">
+        <option value="0" {% if item.isHide == 0 %}selected{% endif %}>แสดง</option>
+        <option value="1" {% if item.isHide == 1 %}selected{% endif %}>ไม่แสดง</option>
+          </select>
+      </div>
+      </div>
+      <br>
+      <div class="row mb-10">
+        <div class="col-sm-2">
+        <label for="ItemPrice">Item Price:</label>
+        <input type="text" class="form-control" id="ItemPrice" name="ItemPrice" value="{{ item.ItemPrice }}" autocomplete="off">
+    </div>
+    <div class="col-sm-2">
+        <label for="Itemstock">Item Stock:</label>
+        <input type="text" class="form-control" id="Itemstock" name="Itemstock" value="{{ item.Itemstock }}" autocomplete="off">
+    </div>
+</div>
+        <br>
+        <div class="d-grid gap-2 d-md-block">
+            <button type="submit" class="btn btn-primary">Update Item</button>
+            <a href="../edit_index" class="btn btn-primary" type="button">กลับหน้าหลัก</a>
+          </div>
+    </form>
+
+
+    {% include "footer.html" %}

@@ -1,0 +1,104 @@
+{% include "header.html" %}
+
+
+
+
+<div class="row g-3">
+      
+    <div class="col-md-auto">
+      <form class="row align-items-center" action="/point_search" method="POST">
+      
+                <input type="text" class="form-control" name="querys" placeholder="Enter your search query" required>
+            </div>
+            <div class="col-md-auto">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+            </form>
+          
+    
+    <div class="col-md-auto">
+      <form action="/point" method="GET">
+        
+          <select class="form-select" name="sort" >
+            <option value="ChaLevel">เลเวล</option>
+            <option value="ChaMoney">ChaMoney</option>
+            <option value="UserPoint">Point กิจกรรม</option>
+            <option value="UserPoint2">Point เติมเงิน</option>
+            <option value="PlayTime">PlayTime</option>
+          </select>
+
+        </div>
+        <div class="col-md-auto">
+          <select class="form-select" name="order" >
+              <option value="DESC">มากไปน้อย</option>
+              <option value="ASC">น้อยไปมาก</option>
+          </select>
+        </div>
+        <div class="col-md-auto">
+          <button type="submit" class="btn btn-primary">ตกลง</button>
+        </div>
+      </form>
+    
+    
+      <div class="col-md-auto">
+        <a class="btn btn-primary" href="../point" role="button">กลับค่าเดิม</a>
+        </div>
+        
+    
+  
+</div>
+
+  <hr/>
+  <h1>Data Display</h1>
+
+  <!-- Wrap the table in a container with a unique id -->
+  <div id="data-container">
+      <table class="table table-bordered border-primary">
+          <tr>
+              <th>ChaNum</th>
+              <th>UserNum</th>
+              <th>UserName</th>
+              <th>ชื่อตัวละคร</th>
+              <th>เลเวล</th>
+              <th>ChaGuName</th>
+              <th>ChaMoney</th>
+              <th>Point กิจกรรม</th>
+              <th>Point เติมเงิน</th>
+              <th>ChaOnline</th>
+              <th>UserOnline</th>
+              <th>PlayTime</th>
+          </tr>
+          
+          {% for row in data %}
+          <tr>
+              <td>{{ row[0] }}</td>
+              <td>{{ row[1] }}</td>
+              <td>{{ row[2] }}</td>
+              <td>{{ row[3] }}</td>
+              <td>{{ row[4] }}</td>
+              <td>{{ row[5] }}</td>
+              <td class="money-column">{{ row[6] }}</td>
+              <td>{{ row[7] }}</td>
+              <td>{{ row[8] }}</td>
+              <td>{% if row[9] == 1 %}
+                  <p style="color:rgb(18, 224, 97);">Online</p>
+                  {% elif row[9] == 0 %}
+                  ไม่ได้ online
+                  {% else %}
+                  Unknown
+                  {% endif %}</td>
+              <td>{% if row[10] == 1 %}
+                  <p style="color:rgb(18, 224, 97);">Online</p>
+                  {% elif row[10] == 0 %}
+                  ไม่ได้ online
+                  {% else %}
+                  Unknown
+                  {% endif %}</td>
+              <td>{{ row[11] }}</td>
+          </tr>
+          {% endfor %}
+      </table>
+  </div>
+
+
+{% include "footer.html" %}

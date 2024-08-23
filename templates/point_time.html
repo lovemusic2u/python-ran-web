@@ -1,0 +1,30 @@
+{% include "header.html" %}
+
+
+<h1>Point Time</h1>
+{% if message %}
+        <p>{{ message }}</p>
+{% endif %}
+<form action="{{ url_for('time_point.index') }}" method="POST">
+    <div class="form-group">
+        <label for="UserID">User Name:</label>
+        <input type="text" class="form-control" id="UserID" name="UserID" required>
+    </div>
+    <div class="form-group">
+        <select id="playtime_to_exchange" name="playtime_to_exchange" class="form-select" aria-label="Default select example">
+            <option value="300">300 นาที</option>
+            <option value="600">600 นาที</option>
+            <option value="900">900 นาที</option>
+            <option value="1200">1200 นาที</option>
+            <option value="1500">1500 นาที</option>
+            <option value="1800">1800 นาที</option>
+            <option value="2100">2100 นาที</option>
+          </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Add Points</button>
+</form>
+
+
+
+{% include "footer.html" %}
